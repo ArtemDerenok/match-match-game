@@ -1,10 +1,17 @@
+import ThemeProvider from 'react-bootstrap/ThemeProvider';
 import './App.scss';
+import Header from './components/Header/Header';
 
 function App() {
   return (
-    <div className="App">
-      Hello world
-    </div>
+    <ThemeProvider 
+      breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+      minBreakpoint="xxs"
+    >
+      <div className="App">
+        <Header />
+      </div>
+    </ThemeProvider>
   );
 }
 
