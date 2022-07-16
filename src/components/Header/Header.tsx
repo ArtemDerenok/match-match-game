@@ -6,7 +6,11 @@ import star from '../../assets/icons/star.png';
 import setting from '../../assets/icons/setting.png'
 import MenuItem from '../MenuItem/MenuItem';
 
-function Header() {
+interface HeaderProps {
+  handleShow: () => void,
+}
+
+function Header({handleShow}: HeaderProps) {
   return (
     <Navbar bg='primary' className='w-75 mx-auto'>
       <Container>
@@ -27,7 +31,7 @@ function Header() {
             <MenuItem img={setting} content='Gane Settings' />
           </Col>
           <Col xs={6} className='d-flex justify-content-end'>
-            <Button variant='light' className={styles.register_button} >Register new player</Button>
+            <Button onClick={handleShow} variant='light' className={styles.register_button} >Register new player</Button>
           </Col>
         </Row>
       </Container>

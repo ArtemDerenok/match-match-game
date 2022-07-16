@@ -1,0 +1,26 @@
+.field {
+  background: rgba(33, 33, 33, 0.08);
+  border-radius: 4px 4px 0px 0px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.avatar {
+  background-image: '../../assets/avatar.png';
+}
+
+.hidden {
+  display: none;
+}
+
+.canvas {
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+}
+
+.img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
