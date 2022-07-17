@@ -28,11 +28,13 @@ function RegisterForm({show, handleClose}: RegisterFormProp) {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
-  const setCanvasImage = (img: HTMLImageElement) => {
-    const copyImg = img;
+  const setCanvasImage = (img: Blob) => {
+    const imgElement = new Image();
+    imgElement.src = URL.createObjectURL(img);
+    imgElement.classList.add(`${styles.img}`);
     const ctx = canvasRef.current?.getContext('2d');
-    copyImg.onload = () => {
-      ctx?.drawImage(img, 0, 0, 200, 200)
+    imgElement.onload = () => {
+      ctx?.drawImage(imgElement, 0, 0, 200, 200)
     }
   }
   
@@ -60,7 +62,7 @@ function RegisterForm({show, handleClose}: RegisterFormProp) {
       handleClose();
     }}
     >
-      {({setFieldValue}) => (
+      {({setFieldValue, isSubmitting}) => (
         <Form>
         <Modal.Body className='d-flex justify-content-between align-items-center'>
           <div>
@@ -75,10 +77,7 @@ function RegisterForm({show, handleClose}: RegisterFormProp) {
             <input type='file' name='avatar' id='file' className={styles.hidden} onChange={(event) => {
               if (event.target.files?.length) {
                 setFieldValue('avatar', event.target.files[0], false)
-                const img = new Image();
-                img.src = URL.createObjectURL(event.target.files[0]);
-                img.classList.add(`${styles.img}`);
-                setCanvasImage(img);
+                setCanvasImage(event.target.files[0]);
               }
             }} />
             <canvas ref={canvasRef} width='200' height='200' className={styles.canvas} />
@@ -88,7 +87,7 @@ function RegisterForm({show, handleClose}: RegisterFormProp) {
         <Button variant='secondary' onClick={handleClose}>
         Close
       </Button>
-      <Button variant="primary" type='submit'>
+      <Button variant="primary" type='submit' disabled={isSubmitting}>
         Add user
       </Button>
         </Modal.Footer>

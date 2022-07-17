@@ -1,10 +1,10 @@
 import { Col, Container, Image, Row } from 'react-bootstrap';
-import pointOneImg from '../assets/point-one.png';
-import formImg from '../assets/form.png';
-import pointTwoImg from '../assets/point-two.png';
-import settingImg from '../assets/settings.png';
-import pointThreeImg from '../assets/point-three.png';
-import cardsImg from '../assets/cards.png';
+import pointOneImg from '../../assets/point-one.png';
+import formImg from '../../assets/form.png';
+import pointTwoImg from '../../assets/point-two.png';
+import settingImg from '../../assets/settings.png';
+import pointThreeImg from '../../assets/point-three.png';
+import cardsImg from '../../assets/cards.png';
 import styles from './MainPage.module.scss';
 
 function MainPage() {  

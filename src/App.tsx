@@ -1,9 +1,14 @@
 import ThemeProvider from 'react-bootstrap/ThemeProvider';
 import './App.scss';
 import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
-import MainPage from './pages/MainPage';
+import MainPage from './pages/mainPage/MainPage';
 import RegisterForm from './components/RegisterForm/RegisterForm';
+import ScorePage from './pages/scorePage/ScorePage';
+import SettingsPage from './pages/settingsPage/SettingsPage';
+import PageNotFound from './pages/404/PageNotFound';
+
 
 function App() {
   const [show, setShow] = useState(false);
@@ -19,7 +24,12 @@ function App() {
     >
       <div className="App">
         <Header handleShow={handleShow} />
-        <MainPage />
+        <Routes>
+          <Route path='/' element={<MainPage />} />
+          <Route path='/score' element={<ScorePage />} />
+          <Route path='/settings' element={<SettingsPage />} />
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
         {show ? <RegisterForm show={show} handleClose={handleClose} /> : null}
       </div>
     </ThemeProvider>
