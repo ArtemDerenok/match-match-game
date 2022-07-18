@@ -1,12 +1,23 @@
 import { Container } from 'react-bootstrap';
 import { nanoid } from 'nanoid'
+import { useEffect } from 'react';
 import styles from './ScorePage.module.scss';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import ScoreItem from '../../components/ScoreItem/ScoreItem';
+import { fetchUsers } from '../../redux/slices/usersSlice';
+import useAppDispatch from '../../hooks/useAppDispatch';
 
 
 function ScorePage() {
   const users = useTypeSelector(state => state.users);
+  console.log(users)
+  const dispatch = useAppDispatch();
+  
+  
+  useEffect(() => {
+    console.log('render')
+    dispatch(fetchUsers())
+  }, []);
   
   return (
     <Container className={`${styles.container} w-75`}>
