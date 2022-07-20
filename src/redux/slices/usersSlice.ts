@@ -1,18 +1,25 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-// import { nanoid } from 'nanoid';
-import { getAllUsersDb } from '../../db/index';
+import { nanoid } from 'nanoid';
+import setUserDb, { getAllUsersDb } from '../../db/index';
+import type { IUser, MyFormValues } from '../../types/interfaces';
 
-interface IUser {
-  firstName: string,
-  lastName: string,
-  email: string,
-  score: number,
-  id: string,
+interface IInitialState {
+  currentUser: IUser,
+  users: Array<IUser>,
 }
 
-const initialState: Array<IUser> = [];
+const initialState: IInitialState = {
+  currentUser: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    score: 0,
+    id: '',
+    avatar: null,
+  },
+  users: [], 
+};
 
 export const fetchUsers = createAsyncThunk(
   'users/fetchUsers', 
@@ -20,7 +27,16 @@ export const fetchUsers = createAsyncThunk(
       const response = await getAllUsersDb()
       return response;
    } 
-  )
+);
+
+export const postUser = createAsyncThunk(
+  'users/postUser',
+  async (data: MyFormValues) => {
+    const newUser = {...data, id: nanoid(), score: 0}
+    await setUserDb(newUser.id, newUser);
+    return newUser;
+  }
+)
 
 const userSlice = createSlice({
   name: 'users',
@@ -28,8 +44,12 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.fulfilled, (state, action: PayloadAction<Array<IUser>, string>) => {
-        state.splice(0, state.length, ...action.payload);
-      })    
+        state.users.splice(0, state.users.length, ...action.payload);
+      }); 
+    builder.addCase(postUser.fulfilled, (state, action: PayloadAction<IUser>) => {
+        state.currentUser = action.payload;
+        state.users.push(action.payload);
+    })   
   }
 })
 
