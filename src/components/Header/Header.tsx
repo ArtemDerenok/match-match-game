@@ -1,6 +1,6 @@
 import Navbar from 'react-bootstrap/Navbar';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import question from '../../assets/icons/question.png';
 import star from '../../assets/icons/star.png';
@@ -22,9 +22,7 @@ function Header({handleShow}: HeaderProps) {
   
   switch(statusApp) {
     case StatusApp.START_GAME:
-      content = <Button onClick={() => {
-        console.log('start')
-      }} variant='light' className={styles.register_button}>Start game</Button>;
+      content = <Button variant='light' className={styles.register_button}><Link to='game' className={styles.link}>Start game</Link></Button>;
       break;
     case StatusApp.STOP_GAME:
       content = <Button onClick={() => {

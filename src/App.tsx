@@ -8,6 +8,7 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import ScorePage from './pages/scorePage/ScorePage';
 import SettingsPage from './pages/settingsPage/SettingsPage';
 import PageNotFound from './pages/404/PageNotFound';
+import GamePage from './pages/gamePage/GamePage';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path='/' element={<MainPage />} />
           <Route path='/score' element={<ScorePage />} />
           <Route path='/settings' element={<SettingsPage />} />
+          <Route path='/game' element={<GamePage />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
         {show ? <RegisterForm show={show} handleClose={handleClose} /> : null}
