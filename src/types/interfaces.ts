@@ -1,3 +1,9 @@
+export enum StatusApp {
+  REGISTER = 'REGISTER',
+  START_GAME = 'START_GAME',
+  STOP_GAME = 'STOP_GAME',
+}
+
 export interface MyFormValues {
   firstName: string,
   lastName: string,
@@ -13,4 +19,3 @@ export interface IUser {
   id: string,
   avatar: string | null,
 }
-

@@ -6,7 +6,8 @@ import avatar from '../../assets/avatar.png';
 import styles from './RegisterForm.module.scss';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { postUser } from '../../redux/slices/usersSlice';
-import { MyFormValues } from '../../types/interfaces';
+import { MyFormValues, StatusApp } from '../../types/interfaces';
+import { setStatusApp } from '../../redux/slices/statusAppSlice';
 
 interface RegisterFormProp {
   show: boolean,
@@ -64,6 +65,7 @@ function RegisterForm({show, handleClose}: RegisterFormProp) {
       email: Yup.string().email('Некорректный адрес электронной почты').required('Поле обязательно для заполнения'),
     })} onSubmit={(values) => {
       dispatch(postUser(values))
+      dispatch(setStatusApp(StatusApp.START_GAME))
       handleClose();
     }}
     >

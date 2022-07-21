@@ -6,12 +6,35 @@ import question from '../../assets/icons/question.png';
 import star from '../../assets/icons/star.png';
 import setting from '../../assets/icons/setting.png'
 import MenuItem from '../MenuItem/MenuItem';
+import useTypeSelector from '../../hooks/useTypeSelector';
+import { StatusApp } from '../../types/interfaces';
+import Avatar from '../Avatar/Avatar';
 
 interface HeaderProps {
   handleShow: () => void,
 }
 
 function Header({handleShow}: HeaderProps) {
+  const {statusApp} = useTypeSelector(state => state.statusApp);
+  const currentUser = useTypeSelector(state => state.users.currentUser);
+  
+  let content;
+  
+  switch(statusApp) {
+    case StatusApp.START_GAME:
+      content = <Button onClick={() => {
+        console.log('start')
+      }} variant='light' className={styles.register_button}>Start game</Button>;
+      break;
+    case StatusApp.STOP_GAME:
+      content = <Button onClick={() => {
+        console.log('stop')
+      }} variant='light' className={styles.register_button}>Stop game</Button>;
+      break;
+    default:
+      content = <Button onClick={handleShow} variant='light' className={styles.register_button} >Register new player</Button>
+  }
+  
   return (
     <Navbar bg='primary' className='w-75 mx-auto'>
       <Container>
@@ -32,7 +55,8 @@ function Header({handleShow}: HeaderProps) {
             <NavLink to='settings' className={({isActive}) => isActive ? styles.active : undefined}><MenuItem img={setting} content='Gane Settings' /></NavLink>
           </Col>
           <Col xs={6} className='d-flex justify-content-end'>
-            <Button onClick={handleShow} variant='light' className={styles.register_button} >Register new player</Button>
+            {content}
+            {statusApp !== StatusApp.REGISTER ? <Avatar src={currentUser.avatar} firstName={currentUser.firstName} /> : null}
           </Col>
         </Row>
       </Container>
