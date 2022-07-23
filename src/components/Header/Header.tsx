@@ -1,6 +1,6 @@
 import Navbar from 'react-bootstrap/Navbar';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 import question from '../../assets/icons/question.png';
 import star from '../../assets/icons/star.png';
@@ -17,12 +17,13 @@ interface HeaderProps {
 function Header({handleShow}: HeaderProps) {
   const {statusApp} = useTypeSelector(state => state.statusApp);
   const currentUser = useTypeSelector(state => state.users.currentUser);
+  const navigate = useNavigate();
   
   let content;
   
   switch(statusApp) {
     case StatusApp.START_GAME:
-      content = <Button variant='light' className={styles.register_button}><Link to='game' className={styles.link}>Start game</Link></Button>;
+      content = <Button variant='light' onClick={() => navigate('game')} className={styles.register_button}>Start game</Button>;
       break;
     case StatusApp.STOP_GAME:
       content = <Button onClick={() => {
