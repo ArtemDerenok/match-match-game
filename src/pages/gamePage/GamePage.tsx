@@ -1,15 +1,22 @@
 import { Container, Col, Row } from 'react-bootstrap';
 import { nanoid } from 'nanoid';
+import { useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
+import Timer from '../../components/Timer/Timer';
 import styles from './GamePage.module.scss';
 import { animals, colors } from '../../utils/data';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import shuffleArray from '../../utils/utils';
 
 function GamePage() {
-  
+  const [time, setTime] = useState(120000);
+  const [cards, setCards] = useState<JSX.Element[]>([]);
   const {cardsType, difficulty} = useTypeSelector(state => state.settings);
-
+  
+  const handleTime = (num: number) => {
+    setTime(num);
+  }
+  
   const createLayout = (cardsArr: Array<JSX.Element>) => {
     const copyArr = cardsArr;
     const content: Array<JSX.Element> = [];
@@ -41,10 +48,14 @@ function GamePage() {
     return content;
   }
   
+  useEffect(() => {
+     setCards(createCards());
+  }, [])
+  
   return (
     <Container className={`${styles.container} w-75`}>
-      <h2>Game page</h2>
-      {createCards()}
+      <Timer time={time} setTime={handleTime} />
+      {cards}
     </Container>
   )
 }

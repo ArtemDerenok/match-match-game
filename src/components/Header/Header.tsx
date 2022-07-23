@@ -1,6 +1,6 @@
 import Navbar from 'react-bootstrap/Navbar';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
 import question from '../../assets/icons/question.png';
 import star from '../../assets/icons/star.png';
