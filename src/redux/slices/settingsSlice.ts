@@ -7,7 +7,7 @@ interface ISettings {
 }
 
 const initialState: ISettings =  {
-  cardsType: 'colors',
+  cardsType: 'animals',
   difficulty: 16,
 };
 

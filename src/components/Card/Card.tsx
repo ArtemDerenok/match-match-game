@@ -1,9 +1,12 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import styles from './Card.module.scss';
-import elephant from '../../assets/animals/001-elephant.png';
 
-function Card() {
+import styles from './Card.module.scss';
+
+interface ICardProps {
+  src: string,
+}
+
+function Card({src}: ICardProps) {
+  
   
   const flipCard = (e: HTMLDivElement) => {
     e.classList.toggle(`${styles.flipped}`);
@@ -11,11 +14,9 @@ function Card() {
   
   return (
     <div className={styles.cardContainer}>
-      <div className={styles.flipCard} onClick={(e) => flipCard(e.currentTarget)}>
+      <div role='button' tabIndex={0} className={styles.flipCard} onKeyUp={(e) => flipCard(e.currentTarget)} onClick={(e) => flipCard(e.currentTarget)}>
     <div className={styles.cardFront}> </div>
-    <div className={styles.cardBack}>
-      <img src={elephant} alt='' />
-    </div>
+    <div className={styles.cardBack} style={{background: src, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}> </div>
   </div>
     </div>
   )

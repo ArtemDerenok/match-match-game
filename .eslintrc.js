@@ -50,7 +50,15 @@ module.exports = {
       }
     ],
     'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error']
+    '@typescript-eslint/no-shadow': ['error'],
+    'jsx-a11y/no-noninteractive-tabindex': [
+      'error',
+      {
+        tags: [],
+        roles: ['tabpanel'],
+        allowExpressionValues: true,
+      },
+    ]
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
@@ -60,5 +68,6 @@ module.exports = {
     'import/resolver': {
       typescript: {} // this loads <rootdir>/tsconfig.json to eslint
     },
+    
   },
 };
