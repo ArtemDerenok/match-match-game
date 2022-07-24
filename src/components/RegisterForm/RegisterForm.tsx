@@ -56,9 +56,9 @@ function RegisterForm({show, handleClose}: RegisterFormProp) {
     </Modal.Header>
 
     <Formik initialValues={initialValues} validationSchema={Yup.object({
-      firstName: Yup.string().min(2, 'Минимум два символа').required('Поле обязательно для заполнения'),
-      lastName: Yup.string().min(2, 'Минимум два символа').required('Поле обязательно для заполнения'),
-      email: Yup.string().email('Некорректный адрес электронной почты').required('Поле обязательно для заполнения'),
+      firstName: Yup.string().min(2, 'Minimum two characters').required('The field is required'),
+      lastName: Yup.string().min(2, 'Minimum two characters').required('The field is required'),
+      email: Yup.string().email('Email is incorrect').required('The field is required'),
     })} onSubmit={(values) => {
       dispatch(postUser(values))
       dispatch(setStatusApp(StatusApp.START_GAME))
