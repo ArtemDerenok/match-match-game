@@ -1,11 +1,22 @@
 import { Container, Dropdown, DropdownButton } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import styles from './SettingsPage.module.scss';
 import { setCardsType, setDifficulty } from '../../redux/slices/settingsSlice';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import useTypeSelector from '../../hooks/useTypeSelector';
+import { setStatusApp } from '../../redux/slices/statusAppSlice';
+import { StatusApp } from '../../types/interfaces';
 
 
 function SettingsPage() {
-  const dispatch = useDispatch();
+  const {currentUser} = useTypeSelector(state => state.users);
+  const dispatch = useAppDispatch();
+  
+  useEffect(() => {
+    if (currentUser.firstName) {
+      dispatch(setStatusApp(StatusApp.START_GAME))
+    }
+  }, [])
   
   const handleSettingsTypeCards = (e: string | null) => {
     if (e) dispatch(setCardsType(e));

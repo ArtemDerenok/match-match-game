@@ -26,9 +26,7 @@ function Header({handleShow}: HeaderProps) {
       content = <Button variant='light' onClick={() => navigate('game')} className={styles.register_button}>Start game</Button>;
       break;
     case StatusApp.STOP_GAME:
-      content = <Button onClick={() => {
-        console.log('stop')
-      }} variant='light' className={styles.register_button}>Stop game</Button>;
+      content = <Button onClick={() => navigate('/')} variant='light' className={styles.register_button}>Stop game</Button>;
       break;
     default:
       content = <Button onClick={handleShow} variant='light' className={styles.register_button} >Register new player</Button>

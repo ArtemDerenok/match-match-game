@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { stat } from 'fs';
 import { nanoid } from 'nanoid';
 import setUserDb, { getAllUsersDb } from '../../db/index';
 import type { IUser, MyFormValues } from '../../types/interfaces';
@@ -36,7 +37,16 @@ export const postUser = createAsyncThunk(
     await setUserDb(newUser.id, newUser);
     return newUser;
   }
+);
+
+export const updateUser = createAsyncThunk(
+  'users/updateUser',
+  async (data: IUser) => {
+    await setUserDb(data.id, data);
+    return data;
+  }
 )
+
 
 const userSlice = createSlice({
   name: 'users',
@@ -44,7 +54,7 @@ const userSlice = createSlice({
   reducers: {
     setScore: (state, action: PayloadAction<number>) => {
       state.currentUser.score += action.payload; 
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.fulfilled, (state, action: PayloadAction<Array<IUser>, string>) => {
@@ -53,6 +63,15 @@ const userSlice = createSlice({
     builder.addCase(postUser.fulfilled, (state, action: PayloadAction<IUser>) => {
         state.currentUser = action.payload;
         state.users.push(action.payload);
+    });
+    builder.addCase(updateUser.fulfilled, (state, action: PayloadAction<IUser>) => {
+        state.currentUser.score = 0;
+        state.users.map((elem) => {
+          if (elem.id === action.payload.id) {
+            elem.score = action.payload.score
+          }
+          return elem;
+        })
     })   
   }
 })

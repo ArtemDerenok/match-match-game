@@ -6,15 +6,20 @@ import useTypeSelector from '../../hooks/useTypeSelector';
 import ScoreItem from '../../components/ScoreItem/ScoreItem';
 import { fetchUsers } from '../../redux/slices/usersSlice';
 import useAppDispatch from '../../hooks/useAppDispatch';
+import { setStatusApp } from '../../redux/slices/statusAppSlice';
+import { StatusApp } from '../../types/interfaces';
 
 
 function ScorePage() {
-  const users = useTypeSelector(state => state.users.users);
+  const {currentUser, users} = useTypeSelector(state => state.users);
   const dispatch = useAppDispatch();
   
   
   useEffect(() => {
     dispatch(fetchUsers())
+    if (currentUser.firstName) {
+      dispatch(setStatusApp(StatusApp.START_GAME))
+    }
   }, []);
   
   return (

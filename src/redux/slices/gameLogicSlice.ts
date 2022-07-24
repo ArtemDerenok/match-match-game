@@ -45,7 +45,8 @@ const gameLogicSlice = createSlice({
     },
     removeBlock: (state) => {
       state.isBlockCards = false;
-    }
+    },
+    resetAllSettings: () => initialState,
   }
 });
 
@@ -60,4 +61,5 @@ export const {
   resetAnswers,
   setBlock,
   removeBlock,
+  resetAllSettings,
 } = actions;
