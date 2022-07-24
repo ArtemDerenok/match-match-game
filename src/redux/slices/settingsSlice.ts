@@ -6,7 +6,7 @@ interface ISettings {
   difficulty: number,
 }
 
-const initialState: ISettings =  {
+const initialState: ISettings = {
   cardsType: 'animals',
   difficulty: 16,
 };

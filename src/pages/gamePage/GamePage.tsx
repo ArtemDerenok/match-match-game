@@ -7,11 +7,28 @@ import styles from './GamePage.module.scss';
 import { animals, colors } from '../../utils/data';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import shuffleArray from '../../utils/utils';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import { resetAnswers, setBlock, setRightAnswer, setWrongAnswer } from '../../redux/slices/gameLogicSlice';
+
+
 
 function GamePage() {
   const [time, setTime] = useState(120000);
   const [cards, setCards] = useState<JSX.Element[]>([]);
   const {cardsType, difficulty} = useTypeSelector(state => state.settings);
+  const gameLogic = useTypeSelector(state => state.gameLogic);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if(gameLogic.secondAnswer) {
+      if (gameLogic.firstAnswer === gameLogic.secondAnswer) {
+        dispatch(setRightAnswer());
+      } else {
+        dispatch(setWrongAnswer());
+      }
+      dispatch(resetAnswers());
+    }
+  }, [gameLogic.secondAnswer])
   
   const handleTime = (num: number) => {
     setTime(num);
@@ -34,7 +51,7 @@ function GamePage() {
     
     for (let i = 0; i < difficulty; i += 1) {
       
-      content.push(<Col key={nanoid()}><Card src={cardsType === 'colors' ? colors[cnt] : `url(/animals/${animals[cnt]})` } /></Col>)
+      content.push(<Col key={nanoid()}><Card src={cardsType === 'colors' ? colors[cnt] : `url(/animals/${animals[cnt]})`} /></Col>)
       
       if (cnt === 7) {
         cnt = 0;

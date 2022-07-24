@@ -23,10 +23,7 @@ function RegisterForm({show, handleClose}: RegisterFormProp) {
   }
   
   const dispatch = useAppDispatch();
-  
-  const getBase64StringFromDataURL = (dataURL: string) =>
-    dataURL.replace('data:', '').replace(/^.+,/, '');
-  
+    
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
   const setCanvasImage = (img: Blob, setFieldValue: (field: string, value: any, shouldValidate?: boolean | undefined) => void) => {
@@ -38,7 +35,6 @@ function RegisterForm({show, handleClose}: RegisterFormProp) {
       ctx?.drawImage(imgElement, 0, 0, 200, 200);
       const dataUrl: string | undefined = canvasRef.current?.toDataURL();
       if (dataUrl) {
-        const base64 = getBase64StringFromDataURL(dataUrl);
         setFieldValue('avatar', dataUrl, true)
       }
     }
