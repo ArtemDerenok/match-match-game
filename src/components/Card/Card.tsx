@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState, useEffect, useRef } from 'react';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import useTypeSelector from '../../hooks/useTypeSelector';
@@ -40,7 +41,7 @@ function Card({src}: ICardProps) {
   
   return (
     <div className={styles.cardContainer}>
-      <div ref={cardRef} role='button' tabIndex={0} className={styles.flipCard} onKeyUp={(e) => flipCard(e.currentTarget)} onClick={(e) => {
+      <div ref={cardRef} role='button' tabIndex={0} className={styles.flipCard} onClick={(e) => {
         if(!isSelected && !gameLogic.isBlockCards) {
           setIsSelected(true);
           flipCard(e.currentTarget);
