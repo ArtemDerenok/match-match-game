@@ -8,7 +8,8 @@ import { animals, colors } from '../../utils/data';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import shuffleArray from '../../utils/utils';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import { resetAnswers, setBlock, setRightAnswer, setWrongAnswer } from '../../redux/slices/gameLogicSlice';
+import { resetAnswers, setRightAnswer, setWrongAnswer } from '../../redux/slices/gameLogicSlice';
+import { setScore } from '../../redux/slices/usersSlice';
 
 
 
@@ -19,10 +20,16 @@ function GamePage() {
   const gameLogic = useTypeSelector(state => state.gameLogic);
   const dispatch = useAppDispatch();
 
+  const calcScore = () => {
+    const result = ((gameLogic.rightAnswer + gameLogic.wrongAnswer) - gameLogic.wrongAnswer) * 100 - ((Math.floor((120000 / 1000) % 60) - Math.floor((time / 1000) % 60)) * 10);
+    dispatch(setScore(result));
+  }
+  
   useEffect(() => {
     if(gameLogic.secondAnswer) {
       if (gameLogic.firstAnswer === gameLogic.secondAnswer) {
         dispatch(setRightAnswer());
+        calcScore();
       } else {
         dispatch(setWrongAnswer());
       }

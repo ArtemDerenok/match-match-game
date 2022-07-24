@@ -41,7 +41,11 @@ export const postUser = createAsyncThunk(
 const userSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {},
+  reducers: {
+    setScore: (state, action: PayloadAction<number>) => {
+      state.currentUser.score += action.payload; 
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.fulfilled, (state, action: PayloadAction<Array<IUser>, string>) => {
         state.users.splice(0, state.users.length, ...action.payload);
@@ -53,7 +57,10 @@ const userSlice = createSlice({
   }
 })
 
-const {reducer} = userSlice;
+const {actions, reducer} = userSlice;
 
 export default reducer;
+export const {
+  setScore,
+} = actions;
 
