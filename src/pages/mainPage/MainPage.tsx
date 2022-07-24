@@ -11,6 +11,7 @@ import useTypeSelector from '../../hooks/useTypeSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { setStatusApp } from '../../redux/slices/statusAppSlice';
 import { StatusApp } from '../../types/interfaces';
+import { resetAllSettings } from '../../redux/slices/gameLogicSlice';
 
 function MainPage() {  
   const {currentUser} = useTypeSelector(state => state.users);
@@ -19,6 +20,7 @@ function MainPage() {
   useEffect(() => {
     if (currentUser.firstName) {
       dispatch(setStatusApp(StatusApp.START_GAME))
+      dispatch(resetAllSettings());
     }
   }, [])
   

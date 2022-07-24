@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import useTypeSelector from '../../hooks/useTypeSelector';
+import { resetAllSettings } from '../../redux/slices/gameLogicSlice';
 import { setStatusApp } from '../../redux/slices/statusAppSlice';
 import { StatusApp } from '../../types/interfaces';
 import styles from './PageNotFound.module.scss';
@@ -13,6 +14,7 @@ function PageNotFound() {
   useEffect(() => {
     if (currentUser.firstName) {
       dispatch(setStatusApp(StatusApp.START_GAME))
+      dispatch(resetAllSettings());
     }
   }, [])
   

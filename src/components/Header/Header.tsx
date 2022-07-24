@@ -9,6 +9,8 @@ import MenuItem from '../MenuItem/MenuItem';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import { StatusApp } from '../../types/interfaces';
 import Avatar from '../Avatar/Avatar';
+import useAppDispatch from '../../hooks/useAppDispatch';
+import { resetAllSettings } from '../../redux/slices/gameLogicSlice';
 
 interface HeaderProps {
   handleShow: () => void,
@@ -17,6 +19,7 @@ interface HeaderProps {
 function Header({handleShow}: HeaderProps) {
   const {statusApp} = useTypeSelector(state => state.statusApp);
   const currentUser = useTypeSelector(state => state.users.currentUser);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   
   let content;
@@ -26,7 +29,10 @@ function Header({handleShow}: HeaderProps) {
       content = <Button variant='light' onClick={() => navigate('game')} className={styles.register_button}>Start game</Button>;
       break;
     case StatusApp.STOP_GAME:
-      content = <Button onClick={() => navigate('/')} variant='light' className={styles.register_button}>Stop game</Button>;
+      content = <Button onClick={() => {
+        dispatch(resetAllSettings());
+        navigate('/')
+      }} variant='light' className={styles.register_button}>Stop game</Button>;
       break;
     default:
       content = <Button onClick={handleShow} variant='light' className={styles.register_button} >Register new player</Button>

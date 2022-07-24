@@ -8,6 +8,7 @@ import { fetchUsers } from '../../redux/slices/usersSlice';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { setStatusApp } from '../../redux/slices/statusAppSlice';
 import { StatusApp } from '../../types/interfaces';
+import { resetAllSettings } from '../../redux/slices/gameLogicSlice';
 
 
 function ScorePage() {
@@ -19,6 +20,7 @@ function ScorePage() {
     dispatch(fetchUsers())
     if (currentUser.firstName) {
       dispatch(setStatusApp(StatusApp.START_GAME))
+      dispatch(resetAllSettings());
     }
   }, []);
   
