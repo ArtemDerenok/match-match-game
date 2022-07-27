@@ -1,6 +1,8 @@
+@import '../../variables';
+
 .logo {
   text-transform: uppercase;
-  font-family: 'Roboto';
+  font-family: $fontFamulyMain;
   font-style: normal;
   font-weight: 500;
   font-size: 11px;
@@ -9,27 +11,27 @@
   vertical-align: middle;
   
   .top {
-    color: white;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: $color_white;
+    text-shadow: $text_shadow;
     width: 80px;
     height: 19px;
   }
   
   .bottom {
-    color: #2196F3;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: $color_main_blue;
+    text-shadow: $text_shadow;
     width: 80px;
     height: 19px;
-    background-color: white;
+    background-color: $color_white;
   }
 }
 
 .register_button {
   text-transform: uppercase;
-  color: #2196F3;
+  color: $color_main_blue;
   box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 1px 18px rgba(0, 0, 0, 0.12), 0px 6px 10px rgba(0, 0, 0, 0.14);
 }
 
 .active {
-  background-color: #1E88E5;
+  background-color: $color_active_blue;
 }

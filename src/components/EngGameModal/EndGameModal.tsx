@@ -1,6 +1,5 @@
 import { Modal, Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
-import styles from './EndGameModal.module.scss';
 import useTypeSelector from '../../hooks/useTypeSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 import { resetAllSettings } from '../../redux/slices/gameLogicSlice';

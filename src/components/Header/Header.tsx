@@ -39,7 +39,7 @@ function Header({handleShow}: HeaderProps) {
   }
   
   return (
-    <Navbar bg='primary' className='w-75 mx-auto'>
+    <Navbar bg='primary' className='w-75 m-auto p-1'>
       <Container>
         <Row className="w-100 aligns-items-center"> 
           <Col xs={3}>

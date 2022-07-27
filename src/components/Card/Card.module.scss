@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .cardContainer {
   position: relative;
   width: 100px;
@@ -17,7 +19,7 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background-color:aqua;
+  background-color: $card_back;
   border-radius: 5px;
 }
 

@@ -1,10 +1,12 @@
+@import '../../variables';
+
 .text {
-  font-family: 'Roboto';
+  font-family: $fontFamulyMain;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
-  color: white;
+  color: $color_white;
 }
 
 .container {
@@ -15,7 +17,7 @@
 }
 
 .logo {
-  background-color: white;
+  background-color: $color_white;
   border-radius: 50%;
   width: 20px;
   height: 20px;
